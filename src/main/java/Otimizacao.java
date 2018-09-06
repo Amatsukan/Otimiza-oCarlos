@@ -71,6 +71,7 @@ public class Otimizacao {
 			parcelasRestricao4.addAll(pegaParcelas(mesesEQuantidadesNegativo));
 			
 			otimizador.criarRestricao(f.nome+"_numeroIgualdeMesesEFuncionarios", 0, parcelasRestricao4, true);
+			otimizador.criarRestricao(f.nome+"_numeroIgualdeMesesEFuncionarios", quantidade_de_func, quantidade_de_func, pegaParcelas(mesesEQuantidades));
 		}
 
 		
