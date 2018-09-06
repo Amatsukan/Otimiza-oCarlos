@@ -26,16 +26,18 @@ public class Otimizacao {
 			
 			int quantidade_de_func = variaveisDoFuncionario.size();
 			
-			Map<Mes,Vector<ParcelaNaOtimizacao>> mesesEQuantidades = new HashMap<>(), mesesEQuantidadesNegativo = new HashMap<>();
+			Map<Mes,Vector<ParcelaNaOtimizacao>> mesesEQuantidades = new HashMap<>(), mesesEQuantidadesNegativo = new HashMap<>(), mesesEQuantidadesPositivo = new HashMap<>();
 			
 			
 			for(double k = 1; k<=quantidade_de_func; k++) {
 				for(Mes m : Mes.values()) {
 					if(!mesesEQuantidades.containsKey(m)) {
 						mesesEQuantidades.put(m, new Vector<>());
+						mesesEQuantidadesPositivo.put(m, new Vector<>());
 						mesesEQuantidadesNegativo.put(m, new Vector<>());
 					}
 					mesesEQuantidades.get(m).addElement(new ParcelaNaOtimizacao(k+"_"+m, k));
+					mesesEQuantidadesPositivo.get(m).addElement(new ParcelaNaOtimizacao(k+"_"+m, 1d));
 					mesesEQuantidadesNegativo.get(m).addElement(new ParcelaNaOtimizacao(k+"_"+m, -1d));
 				}
 			}
@@ -71,7 +73,7 @@ public class Otimizacao {
 			parcelasRestricao4.addAll(pegaParcelas(mesesEQuantidadesNegativo));
 			
 			otimizador.criarRestricao(f.nome+"_numeroIgualdeMesesEFuncionarios", 0, parcelasRestricao4, true);
-			otimizador.criarRestricao(f.nome+"_numeroIgualdeMesesEFuncionarios", quantidade_de_func, quantidade_de_func, pegaParcelas(mesesEQuantidades));
+			otimizador.criarRestricao(f.nome+"_numeroIgualdeMesesEFuncionarios", quantidade_de_func, quantidade_de_func, pegaParcelas(mesesEQuantidadesPositivo));
 		}
 
 		

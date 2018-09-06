@@ -11,7 +11,7 @@ public class Funcionario {
 	static int ID = 0;
 	
 	public Funcionario(String nome, double custo, Vector<Mes> periodoPossivelParaFerias) {
-		this.nome = nome+ID++;//evitando problemas com nomes iguais
+		this.nome = nome;//evitando problemas com nomes iguais
 		this.custo = custo;
 		this.periodoPossivelParaFerias = periodoPossivelParaFerias;
 	}
